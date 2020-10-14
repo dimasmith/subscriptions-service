@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:tc:mysql:8.0:///subscription
+  flyway:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: validate

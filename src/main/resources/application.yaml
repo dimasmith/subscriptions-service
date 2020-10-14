@@ -1,0 +1,7 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/subscription
+    username: subscription
+    password: s3cr3t
