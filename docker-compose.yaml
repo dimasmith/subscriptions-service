@@ -1,5 +1,15 @@
 version: '3.8'
 services:
+  subscriptions:
+    image: subscriptions-service
+    ports:
+    - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/subscription
+      SPRING_DATASOURCE_USERNAME: subscription
+      SPRING_DATASOURCE_PASSWORD: s3cr3t
+    links:
+      - database:database
   database:
     image: mysql:8.0
     ports:
