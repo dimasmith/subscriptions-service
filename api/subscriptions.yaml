@@ -1,0 +1,95 @@
+openapi: 3.0.1
+info:
+  title: Subscription API
+  description: Handle service subscriptions.
+  version: 0.1.0
+servers:
+  - url: 'https://localhost:8080'
+paths:
+  /v1/subscriptions:
+    post:
+      summary: Creates a subscription for the service.
+      description: Optional extended description in Markdown.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                service:
+                  description: Description of the service you subsribing
+                  type: object
+                  properties:
+                    title:
+                      description: Service title
+                      type: string
+                      required: true
+                      minLength: 1
+                subscription:
+                  description: Subscription details
+                  type: object
+                  properties:
+                    cadence:
+                      description: Type of subscription
+                      type: string
+                      enum:
+                        - MONTHLY
+                        - ANNUAL
+                        - CUSTOM
+                      required: true
+                      default: MONTHLY
+                    price:
+                      description: Subscription price
+                      type: object
+                      properties:
+                        currency:
+                          description: ISO currency code
+                          type: string
+                          required: true
+                          minLength: 3
+                          maxLength: 3
+                          default: USD
+                        amount:
+                          description: Amount of payment. Must be higher than zero
+                          type: number
+                          required: true
+                          minimum: 0.01
+                          default: "0.01"
+                    month:
+                      description: Payment month for annual subscription. Use only with `ANNUAL` subscription.
+                      type: string
+                      enum:
+                        - JANUARY
+                        - FEBRUARY
+                        - MARCH
+                        - APRIL
+                        - MAY
+                        - JUNE
+                        - JULY
+                        - AUGUST
+                        - SEPTEMBER
+                        - OCTOBER
+                        - NOVEMBER
+                        - DECEMBER
+                      required: false
+                    months:
+                      description: List of month when you need to pay for the service. Use only with `CUSTOM` subscription
+                      type: array
+                      items:
+                        type: string
+                        enum:
+                          - JANUARY
+                          - FEBRUARY
+                          - MARCH
+                          - APRIL
+                          - MAY
+                          - JUNE
+                          - JULY
+                          - AUGUST
+                          - SEPTEMBER
+                          - OCTOBER
+                          - NOVEMBER
+                          - DECEMBER
+                      required: false
+      responses:
+        '201':
+          description: Subscribed
