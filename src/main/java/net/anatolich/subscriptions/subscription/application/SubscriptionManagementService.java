@@ -1,9 +1,6 @@
 package net.anatolich.subscriptions.subscription.application;
 
-import java.time.Month;
-import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.security.domain.UserProvider;
 import net.anatolich.subscriptions.subscription.domain.PreferredCurrencyProvider;
 import net.anatolich.subscriptions.subscription.domain.CurrencyConverter;

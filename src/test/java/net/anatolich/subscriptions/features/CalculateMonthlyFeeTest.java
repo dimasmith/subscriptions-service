@@ -32,13 +32,13 @@ class CalculateMonthlyFeeTest {
         MonthlyFee monthlyFee = service.calculateMonthlyFee(Month.MAY, 2021);
 
         Assertions.assertThat(monthlyFee.total())
-            .isEqualTo(Money.of(24.98, "UAH"));
+            .isEqualTo(Money.of(24.98, "USD"));
     }
 
     private SubscribeCommand monthly(String serviceName, double price) {
         return SubscribeCommand.builder()
             .service(OnlineServiceDto.of(serviceName))
-            .subscription(MonthlySubscriptionDto.of(MoneyDto.of(price, "UAH")))
+            .subscription(MonthlySubscriptionDto.of(MoneyDto.of(price, "USD")))
             .build();
     }
 }
