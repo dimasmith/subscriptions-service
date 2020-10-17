@@ -23,3 +23,5 @@ You can also access the swagger UI on [http://localhost:8080/swagger-ui.html](ht
 Calls to endpoints must be authenticated. 
 Service uses basic authentication to secure access. 
 When service starts for the first time it configures a single user with username `admin` and password `secret`.
+
+Calls to swagger-ui and OpenAPI aren't secured.
