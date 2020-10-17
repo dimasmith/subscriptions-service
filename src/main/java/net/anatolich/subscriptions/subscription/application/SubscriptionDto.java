@@ -15,7 +15,10 @@ import net.anatolich.subscriptions.subscription.domain.Cadence;
 import net.anatolich.subscriptions.subscription.domain.Money;
 import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 
-@Schema(name = "Subscription", discriminatorProperty = "cadence",
+@Schema(
+    name = "Subscription",
+    description = "Subscription with recurring payments",
+    discriminatorProperty = "cadence",
     discriminatorMapping = {
         @DiscriminatorMapping(value = "MONTHLY", schema = MonthlySubscriptionDto.class),
         @DiscriminatorMapping(value = "ANNUAL", schema = AnnualSubscriptionDto.class),

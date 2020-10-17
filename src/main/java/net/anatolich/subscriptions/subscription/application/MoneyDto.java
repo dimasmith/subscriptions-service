@@ -2,7 +2,6 @@ package net.anatolich.subscriptions.subscription.application;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
-import java.util.Currency;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,7 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
-@Schema(name = "Money")
+@Schema(name = "Money", description = "Monetary value with amount and currency code.")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
