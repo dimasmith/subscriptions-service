@@ -2,8 +2,6 @@ name: master
 on:
   push:
     branches:
-      # todo: remove before merging
-      - "*"
       - master
 jobs:
   build:
