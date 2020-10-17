@@ -4,10 +4,14 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import java.time.LocalDate;
+import java.time.Month;
 import javax.validation.Valid;
+import net.anatolich.subscriptions.subscription.application.MonthlyFee;
 import net.anatolich.subscriptions.subscription.application.SubscribeCommand;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,5 +39,20 @@ public class SubscriptionsEndpoint {
     @ResponseStatus(HttpStatus.CREATED)
     public void subscribe(@Valid @RequestBody SubscribeCommand subscribeCommand) {
         subscriptions.subscribe(subscribeCommand);
+    }
+
+    @Operation(
+        summary = "Calculate the total fee for the current month.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Calculated")
+        }
+    )
+    @GetMapping(path = "/fee")
+    public MonthlyFeePayload calculateMonthlyFeeForThisMonth() {
+        var today = LocalDate.now();
+        final Month currentMonth = today.getMonth();
+        final int currentYear = today.getYear();
+        var monthlyFee = subscriptions.calculateMonthlyFee(currentMonth, currentYear);
+        return MonthlyFeePayload.from(monthlyFee);
     }
 }

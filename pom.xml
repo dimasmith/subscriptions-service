@@ -17,6 +17,7 @@
     <properties>
         <java.version>11</java.version>
         <testcontainers.version>1.14.3</testcontainers.version>
+        <database-rider.version>1.16.1</database-rider.version>
     </properties>
 
     <dependencies>
@@ -84,6 +85,24 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-core</artifactId>
+            <version>${database-rider.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-junit5</artifactId>
+            <version>${database-rider.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-spring</artifactId>
+            <version>${database-rider.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

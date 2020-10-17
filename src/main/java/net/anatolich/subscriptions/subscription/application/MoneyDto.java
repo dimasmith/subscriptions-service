@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.anatolich.subscriptions.subscription.domain.Money;
 import org.hibernate.validator.constraints.Length;
 
 @Schema(name = "Money", description = "Monetary value with amount and currency code.")
@@ -29,5 +30,9 @@ public class MoneyDto {
 
     public static MoneyDto of(double amount, String currencyCode) {
         return new MoneyDto(BigDecimal.valueOf(amount), currencyCode);
+    }
+
+    public static MoneyDto from(Money monetaryValue) {
+        return new MoneyDto(monetaryValue.getAmount(), monetaryValue.getCurrency().getCurrencyCode());
     }
 }

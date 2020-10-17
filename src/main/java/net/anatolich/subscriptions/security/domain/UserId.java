@@ -2,6 +2,7 @@ package net.anatolich.subscriptions.security.domain;
 
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import lombok.ToString;
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@EqualsAndHashCode
 @ToString
 public class UserId {
     private String username;
@@ -34,6 +36,6 @@ public class UserId {
         if (this.username != null) {
             throw new IllegalStateException("username must not be changed");
         }
-        this.username = username;
+        this.username = username.toLowerCase();
     }
 }
