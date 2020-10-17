@@ -1,4 +1,4 @@
-name: Verify
+name: Publish Docker Image
 on: [push]
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
           java-version: 15
       - name: build
         run: >
-          mvn -B compile jib:build
+          mvn -B verify jib:build
           -Djib.to.image=docker.io/dimasmith/subscriptions-service
           -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }}
           -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }}
