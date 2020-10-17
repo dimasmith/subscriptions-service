@@ -16,7 +16,7 @@ mvn compile jib:dockerBuild
 
 When service starts it exposes generated OpenAPI spec. 
 You can access it on the [http://localhost:8080/v3/api-docs.yaml](http://localhost:8080/v3/api-docs.yaml).
-You can also access the swagger UI on [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+You can also access the swagger UI on [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html).
 
 ## Security
 
