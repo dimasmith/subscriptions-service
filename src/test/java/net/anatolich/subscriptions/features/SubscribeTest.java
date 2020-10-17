@@ -16,8 +16,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
@@ -46,7 +44,7 @@ class SubscribeTest {
 
     @Test
     @DisplayName("create monthly subscription")
-    @WithMockUser
+    @WithMockUser("admin")
     void createMonthlySubscription() throws Exception {
         final var subscribeCommand = new SubscribeCommand(
             new OnlineServiceDto("Monthly Paid Service"),
@@ -61,7 +59,7 @@ class SubscribeTest {
 
     @Test
     @DisplayName("create annual subscription")
-    @WithMockUser
+    @WithMockUser("admin")
     void createAnnualSubscription() throws Exception {
         final var subscribeCommand = new SubscribeCommand(
             new OnlineServiceDto("Annually Paid Service"),
