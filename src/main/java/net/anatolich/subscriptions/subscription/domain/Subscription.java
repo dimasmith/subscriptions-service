@@ -1,6 +1,8 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,28 +10,41 @@ import javax.persistence.TableGenerator;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import net.anatolich.subscriptions.security.domain.UserId;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"name", "fee"})
+@ToString(of = {"name", "fee", "owner"})
 public class Subscription {
 
-    @Id @GeneratedValue(generator = "subscriptionSequence")
+    @Id
+    @GeneratedValue(generator = "subscriptionSequence")
     @TableGenerator(name = "subscriptionSequence", table = "subscription_sequence")
     private Long id;
+
     @Column(nullable = false, length = 100)
     private String name;
+
+    @Embedded
+    @AttributeOverride(
+        name = "username",
+        column = @Column(name = "owner", length = 50, nullable = false, updatable = false)
+    )
+    private UserId owner;
+    @Embedded
     private Money fee;
+    @Embedded
     private PaymentSchedule schedule;
 
-    private Subscription(String name, Money fee, PaymentSchedule schedule) {
+    private Subscription(String name, UserId owner, Money fee, PaymentSchedule schedule) {
         setName(name);
         setFee(fee);
         setSchedule(schedule);
+        setOwner(owner);
     }
 
-    public static Subscription subscription(String name, Money fee, PaymentSchedule schedule) {
-        return new Subscription(name, fee, schedule);
+    public static Subscription subscription(String name, UserId owner, Money fee, PaymentSchedule schedule) {
+        return new Subscription(name, owner, fee, schedule);
     }
 
     public Long id() {
@@ -55,5 +70,12 @@ public class Subscription {
             throw new IllegalArgumentException("schedule must be set");
         }
         this.schedule = schedule;
+    }
+
+    public void setOwner(UserId owner) {
+        if (owner == null) {
+            throw new IllegalArgumentException("owner must be set");
+        }
+        this.owner = owner;
     }
 }

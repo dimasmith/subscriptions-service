@@ -1,6 +1,5 @@
 package net.anatolich.subscriptions.subscription.application;
 
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
