@@ -11,3 +11,5 @@ jobs:
           java-version: 15
       - name: compile
         run: mvn -B compile --file pom.xml
+      - name: verify
+          run: mvn -B verify --file pom.xml
