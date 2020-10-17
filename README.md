@@ -17,3 +17,9 @@ mvn compile jib:dockerBuild
 When service starts it exposes generated OpenAPI spec. 
 You can access it on the [http://localhost:8080/v3/api-docs.yaml](http://localhost:8080/v3/api-docs.yaml).
 You can also access the swagger UI on [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+## Security
+
+Calls to endpoints must be authenticated. 
+Service uses basic authentication to secure access. 
+When service starts for the first time it configures a single user with username `admin` and password `secret`.
