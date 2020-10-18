@@ -49,7 +49,7 @@ public abstract class SubscriptionDto {
     private MoneyDto price;
 
     public Money fee() {
-        return Money.fee(price.getAmount(), Currency.getInstance(price.getCurrency()));
+        return Money.of(price.getAmount(), Currency.getInstance(price.getCurrency()));
     }
 
     public abstract PaymentSchedule schedule();

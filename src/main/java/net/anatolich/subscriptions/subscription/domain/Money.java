@@ -2,6 +2,7 @@ package net.anatolich.subscriptions.subscription.domain;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -15,7 +16,6 @@ import lombok.ToString;
 @Getter
 @Setter(AccessLevel.PROTECTED)
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money {
     @Column(nullable = false)
@@ -28,7 +28,7 @@ public class Money {
         setCurrency(currency);
     }
 
-    public static Money fee(BigDecimal amount, Currency currency) {
+    public static Money of(BigDecimal amount, Currency currency) {
         return new Money(amount, currency);
     }
 
@@ -37,6 +37,10 @@ public class Money {
             BigDecimal.valueOf(amount),
             Currency.getInstance(currencyCode)
         );
+    }
+
+    public static Money zero(Currency currency) {
+        return of(BigDecimal.ZERO, currency);
     }
 
     public Money add(Money other) {
@@ -66,5 +70,21 @@ public class Money {
         this.amount = amount;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Money)) {
+            return false;
+        }
+        final Money money = (Money) o;
+        return currency.equals(money.currency) &&
+            amount.compareTo(money.amount) == 0;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(currency, amount);
+    }
 }

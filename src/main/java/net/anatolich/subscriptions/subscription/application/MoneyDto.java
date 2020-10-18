@@ -1,5 +1,6 @@
 package net.anatolich.subscriptions.subscription.application;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMin;
