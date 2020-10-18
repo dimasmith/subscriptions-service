@@ -16,4 +16,8 @@ public class OnlineServiceDto {
     @NotBlank(message = "please provide the service name")
     @Schema(description = "the name of the service")
     private String name;
+
+    public static OnlineServiceDto of(String serviceName) {
+        return new OnlineServiceDto(serviceName);
+    }
 }

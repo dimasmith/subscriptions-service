@@ -1,5 +1,6 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import java.time.Month;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -49,6 +50,18 @@ public class Subscription {
 
     public Long id() {
         return id;
+    }
+
+    public Money fee() {
+        return fee;
+    }
+
+    public boolean activeFor(Month month) {
+        return schedule.activeFor(month);
+    }
+
+    public boolean belongsTo(UserId owner) {
+        return this.owner.equals(owner);
     }
 
     private void setName(String name) {

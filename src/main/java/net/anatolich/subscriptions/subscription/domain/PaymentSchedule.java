@@ -70,4 +70,8 @@ public class PaymentSchedule {
         }
         this.periods = periods;
     }
+
+    public boolean activeFor(Month month) {
+        return periods.contains(month);
+    }
 }

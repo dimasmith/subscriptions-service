@@ -1,0 +1,49 @@
+subscription:
+  - id: 1
+    name: Dropbox
+    owner: admin
+    amount: 19.99
+    currency: USD
+    cadence: MONTHLY
+  - id: 2
+    name: JetBrains
+    owner: admin
+    amount: 149.99
+    currency: USD
+    cadence: ANNUAL
+  - id: 3
+    name: JetBrains
+    owner: user
+    amount: 149.99
+    currency: USD
+    cadence: ANNUAL
+
+subscription_periods:
+  - subscription_id: 1
+    period_name: JANUARY
+  - subscription_id: 1
+    period_name: FEBRUARY
+  - subscription_id: 1
+    period_name: MARCH
+  - subscription_id: 1
+    period_name: APRIL
+  - subscription_id: 1
+    period_name: MAY
+  - subscription_id: 1
+    period_name: JUNE
+  - subscription_id: 1
+    period_name: JULY
+  - subscription_id: 1
+    period_name: AUGUST
+  - subscription_id: 1
+    period_name: SEPTEMBER
+  - subscription_id: 1
+    period_name: OCTOBER
+  - subscription_id: 1
+    period_name: NOVEMBER
+  - subscription_id: 1
+    period_name: DECEMBER
+  - subscription_id: 2
+    period_name: MAY
+  - subscription_id: 3
+    period_name: MAY

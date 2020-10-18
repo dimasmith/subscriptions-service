@@ -1,5 +1,8 @@
 package net.anatolich.subscriptions.subscription.infrastructure.jpa;
 
+import java.time.Month;
+import java.util.List;
+import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.subscription.domain.Subscription;
 import net.anatolich.subscriptions.subscription.domain.SubscriptionRepository;
 import org.springframework.stereotype.Component;
@@ -16,5 +19,10 @@ public class JpaSubscriptionRepository implements SubscriptionRepository {
     @Override
     public Long add(Subscription subscription) {
         return repository.save(subscription).id();
+    }
+
+    @Override
+    public List<Subscription> findSubscriptionsForMonth(Month month, UserId owner) {
+        return repository.findSubscriptionsByOwnerAndMonth(month, owner);
     }
 }
