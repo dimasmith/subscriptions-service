@@ -138,6 +138,9 @@
                     <to>
                         <image>${artifactId}</image>
                     </to>
+                    <from>
+                        <image>openjdk:15-alpine</image>
+                    </from>
                 </configuration>
             </plugin>
         </plugins>
