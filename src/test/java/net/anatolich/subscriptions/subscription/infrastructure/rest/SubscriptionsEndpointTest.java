@@ -89,4 +89,18 @@ class SubscriptionsEndpointTest {
             .andExpect(jsonPath("total.amount", Matchers.equalTo(100.0)))
             .andExpect(jsonPath("total.currency", Matchers.equalTo("USD")));
     }
+
+    @Test
+    @DisplayName("calculate fee for the particular month")
+    @WithMockUser
+    void calculateFeeForTheParticularMonth() throws Exception {
+        when(subscriptions.calculateMonthlyFee(Month.MAY, 2020))
+            .thenReturn(MonthlyFee.withTotal(Money.of(100, "USD")));
+
+        mockMvc.perform(
+            get("/v1/subscriptions/fee/2020-MAY").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("total.amount", Matchers.equalTo(100.0)))
+            .andExpect(jsonPath("total.currency", Matchers.equalTo("USD")));
+    }
 }
