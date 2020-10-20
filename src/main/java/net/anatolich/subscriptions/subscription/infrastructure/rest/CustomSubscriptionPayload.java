@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.application;
+package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Month;
@@ -16,14 +16,14 @@ import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-public class CustomSubscriptionDto extends SubscriptionDto {
+public class CustomSubscriptionPayload extends BaseSubscriptionPayload {
 
     @Schema(description = "names of months when you should pay for your subscriptions")
     @NotNull
     @NotEmpty
     private List<Month> months;
 
-    public CustomSubscriptionDto() {
+    public CustomSubscriptionPayload() {
         setCadence(Cadence.CUSTOM);
     }
 

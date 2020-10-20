@@ -1,73 +1,55 @@
 package net.anatolich.subscriptions.features;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.database.rider.core.api.configuration.DBUnit;
+import com.github.database.rider.core.api.dataset.CompareOperation;
+import com.github.database.rider.core.api.dataset.ExpectedDataSet;
+import com.github.database.rider.spring.api.DBRider;
 import java.time.Month;
-import net.anatolich.subscriptions.subscription.application.AnnualSubscriptionDto;
-import net.anatolich.subscriptions.subscription.application.MoneyDto;
-import net.anatolich.subscriptions.subscription.application.MonthlySubscriptionDto;
-import net.anatolich.subscriptions.subscription.application.OnlineServiceDto;
-import net.anatolich.subscriptions.subscription.application.SubscribeCommand;
-import org.junit.jupiter.api.BeforeEach;
+import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.AnnualSubscriptionPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.MoneyPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.MonthlySubscriptionPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.ServicePayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.SubscribeCommandPayload;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.json.AutoConfigureJson;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureJson
+@SpringBootTest
+@DBRider
+@DBUnit(columnSensing = true, caseSensitiveTableNames = true)
 @DisplayName("subscribe")
 class SubscribeTest {
-
-    private MockMvc mockMvc;
     @Autowired
-    private ObjectMapper json;
-    @Autowired
-    private WebApplicationContext context;
-
-    @BeforeEach
-    void configureMockMvc() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context)
-            .apply(springSecurity())
-            .build();
-    }
+    private SubscriptionManagementService subscriptions;
 
     @Test
     @DisplayName("create monthly subscription")
+    @ExpectedDataSet(value = "subscriptions/createMonthlySubscription-expected.yml",
+        compareOperation = CompareOperation.CONTAINS)
     @WithMockUser("admin")
-    void createMonthlySubscription() throws Exception {
-        final var subscribeCommand = new SubscribeCommand(
-            new OnlineServiceDto("Monthly Paid Service"),
-            MonthlySubscriptionDto.of(MoneyDto.of(19.99, "USD")));
+    void createMonthlySubscription() {
+        final var subscribeCommand = new SubscribeCommandPayload(
+            new ServicePayload("Monthly Paid Service"),
+            MonthlySubscriptionPayload.of(MoneyPayload.of(19.99, "USD")));
 
-        mockMvc.perform(post("/v1/subscriptions")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(json.writeValueAsBytes(subscribeCommand)))
-            .andExpect(status().isCreated());
-
+        subscriptions.subscribe(subscribeCommand.getService().getName(),
+            subscribeCommand.getSubscription().fee(), subscribeCommand.getSubscription().schedule());
     }
 
     @Test
     @DisplayName("create annual subscription")
+    @ExpectedDataSet(value = "subscriptions/createAnnualSubscription-expected.yml",
+        compareOperation = CompareOperation.CONTAINS)
     @WithMockUser("admin")
-    void createAnnualSubscription() throws Exception {
-        final var subscribeCommand = new SubscribeCommand(
-            new OnlineServiceDto("Annually Paid Service"),
-            AnnualSubscriptionDto.of(MoneyDto.of(2499.00, "UAH"), Month.AUGUST));
+    void createAnnualSubscription() {
+        final var subscribeCommand = new SubscribeCommandPayload(
+            new ServicePayload("Annually Paid Service"),
+            AnnualSubscriptionPayload.of(MoneyPayload.of(2499.00, "UAH"), Month.AUGUST));
 
-        mockMvc.perform(post("/v1/subscriptions")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(json.writeValueAsBytes(subscribeCommand)))
-            .andExpect(status().isCreated());
+        subscriptions.subscribe(subscribeCommand.getService().getName(),
+            subscribeCommand.getSubscription().fee(), subscribeCommand.getSubscription().schedule());
     }
 }

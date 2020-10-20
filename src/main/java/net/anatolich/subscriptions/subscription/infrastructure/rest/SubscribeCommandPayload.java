@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.application;
+package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.Valid;
@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubscribeCommand {
+public class SubscribeCommandPayload {
     @Valid
     @NotNull
-    private OnlineServiceDto service;
+    private ServicePayload service;
     @Valid
     @NotNull
-    private SubscriptionDto subscription;
+    private BaseSubscriptionPayload subscription;
 }

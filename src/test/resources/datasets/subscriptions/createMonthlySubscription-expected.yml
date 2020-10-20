@@ -1,0 +1,5 @@
+subscription:
+  - name: Monthly Paid Service
+    amount: 19.99
+    currency: USD
+    cadence: MONTHLY

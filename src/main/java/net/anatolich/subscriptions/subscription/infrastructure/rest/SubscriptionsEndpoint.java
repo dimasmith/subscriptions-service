@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.validation.Valid;
-import net.anatolich.subscriptions.subscription.application.SubscribeCommand;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +36,11 @@ public class SubscriptionsEndpoint {
     )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void subscribe(@Valid @RequestBody SubscribeCommand subscribeCommand) {
-        subscriptions.subscribe(subscribeCommand);
+    public void subscribe(@Valid @RequestBody SubscribeCommandPayload subscribeCommand) {
+        var serviceName = subscribeCommand.getService().getName();
+        var fee = subscribeCommand.getSubscription().fee();
+        var schedule = subscribeCommand.getSubscription().schedule();
+        subscriptions.subscribe(serviceName, fee, schedule);
     }
 
     @Operation(

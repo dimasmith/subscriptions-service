@@ -1,24 +1,36 @@
 package net.anatolich.subscriptions.currency.domain;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Currency;
+import javax.persistence.Embeddable;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.Value;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import net.anatolich.subscriptions.subscription.domain.Money;
 
-@Value
+@Embeddable
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(of = {"sourceCurrency", "targetCurrency"})
+@ToString
 public class ExchangeRate {
 
-    Currency sourceCurrency;
-    Currency targetCurrency;
-    BigDecimal rate;
+    private Currency sourceCurrency;
+    private Currency targetCurrency;
+    private BigDecimal rate;
+    private LocalDateTime updatedOn;
 
     public static ExchangeRate of(String sourceCurrency, String targetCurrency, double rate) {
         return new ExchangeRate(
             Currency.getInstance(sourceCurrency),
             Currency.getInstance(targetCurrency),
-            BigDecimal.valueOf(rate)
+            BigDecimal.valueOf(rate),
+            LocalDateTime.now()
         );
     }
 

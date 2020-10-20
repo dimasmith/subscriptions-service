@@ -1,6 +1,5 @@
-package net.anatolich.subscriptions.subscription.application;
+package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMin;
@@ -16,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MoneyDto {
+public class MoneyPayload {
 
     @Schema(description = "amount of money")
     @NotNull
@@ -29,11 +28,11 @@ public class MoneyDto {
     @Length(min = 3, max = 3)
     private String currency;
 
-    public static MoneyDto of(double amount, String currencyCode) {
-        return new MoneyDto(BigDecimal.valueOf(amount), currencyCode);
+    public static MoneyPayload of(double amount, String currencyCode) {
+        return new MoneyPayload(BigDecimal.valueOf(amount), currencyCode);
     }
 
-    public static MoneyDto from(Money monetaryValue) {
-        return new MoneyDto(monetaryValue.getAmount(), monetaryValue.getCurrency().getCurrencyCode());
+    public static MoneyPayload from(Money monetaryValue) {
+        return new MoneyPayload(monetaryValue.getAmount(), monetaryValue.getCurrency().getCurrencyCode());
     }
 }
