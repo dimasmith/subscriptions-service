@@ -5,9 +5,10 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.security.domain.UserProvider;
-import net.anatolich.subscriptions.subscription.domain.PreferredCurrencyProvider;
 import net.anatolich.subscriptions.subscription.domain.CurrencyConverter;
 import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.PreferredCurrencyProvider;
 import net.anatolich.subscriptions.subscription.domain.Subscription;
 import net.anatolich.subscriptions.subscription.domain.SubscriptionRepository;
 import org.springframework.stereotype.Service;
@@ -34,17 +35,13 @@ public class SubscriptionManagementService {
     }
 
     @Transactional
-    public void subscribe(SubscribeCommand subscribeCommand) {
+    public void subscribe(String serviceName, Money fee, PaymentSchedule schedule) {
         var currentUser = userProvider.currentUser();
-        log.info("subscribing {} to {}", currentUser, subscribeCommand);
+        log.info("subscribing {} to {}", currentUser, serviceName);
         final var subscription = Subscription.subscription(
-            subscribeCommand.getService().getName(),
-            currentUser,
-            subscribeCommand.getSubscription().fee(),
-            subscribeCommand.getSubscription().schedule()
-        );
+            serviceName, currentUser, fee, schedule);
         final var subscriptionId = subscriptions.add(subscription);
-        log.info("subscribed to {} with id {}", subscribeCommand, subscriptionId);
+        log.info("subscribed to {} with id {}", serviceName, subscriptionId);
     }
 
     @Transactional(readOnly = true)

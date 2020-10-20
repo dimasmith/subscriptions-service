@@ -2,6 +2,7 @@ package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,13 +13,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Month;
-import net.anatolich.subscriptions.subscription.application.MoneyDto;
 import net.anatolich.subscriptions.subscription.application.MonthlyFee;
-import net.anatolich.subscriptions.subscription.application.MonthlySubscriptionDto;
-import net.anatolich.subscriptions.subscription.application.OnlineServiceDto;
-import net.anatolich.subscriptions.subscription.application.SubscribeCommand;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,9 +42,9 @@ class SubscriptionsEndpointTest {
     @DisplayName("create subscription")
     @WithMockUser
     void createSubscription() throws Exception {
-        SubscribeCommand payload = new SubscribeCommand();
-        payload.setService(new OnlineServiceDto("Service"));
-        payload.setSubscription(MonthlySubscriptionDto.of(MoneyDto.of(100, "USD")));
+        SubscribeCommandPayload payload = new SubscribeCommandPayload();
+        payload.setService(new ServicePayload("Service"));
+        payload.setSubscription(MonthlySubscriptionPayload.of(MoneyPayload.of(100.0, "USD")));
 
         mockMvc.perform(
             post("/v1/subscriptions")
@@ -54,16 +52,20 @@ class SubscriptionsEndpointTest {
                 .content(json.writeValueAsBytes(payload)))
             .andExpect(status().isCreated());
 
-        verify(subscriptions).subscribe(any(SubscribeCommand.class));
+        verify(subscriptions).subscribe(
+            "Service",
+            Money.of(100.0, "USD"),
+            PaymentSchedule.monthly()
+        );
     }
 
     @Test
     @DisplayName("send invalid creation payload")
     @WithMockUser
     void sendInvalidCreationPayload() throws Exception {
-        SubscribeCommand payload = new SubscribeCommand();
+        SubscribeCommandPayload payload = new SubscribeCommandPayload();
         payload.setService(null); // missing service
-        payload.setSubscription(MonthlySubscriptionDto.of(MoneyDto.of(100, "USD")));
+        payload.setSubscription(MonthlySubscriptionPayload.of(MoneyPayload.of(100, "USD")));
 
         mockMvc.perform(
             post("/v1/subscriptions")
@@ -71,7 +73,7 @@ class SubscriptionsEndpointTest {
                 .content(json.writeValueAsBytes(payload)))
             .andExpect(status().isBadRequest());
 
-        verify(subscriptions, never()).subscribe(any(SubscribeCommand.class));
+        verify(subscriptions, never()).subscribe(anyString(), any(Money.class), any(PaymentSchedule.class));
     }
 
     @Test

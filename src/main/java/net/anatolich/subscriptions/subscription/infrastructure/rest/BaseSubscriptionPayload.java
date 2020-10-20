@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.application;
+package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -20,11 +20,11 @@ import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
     description = "Subscription with recurring payments",
     discriminatorProperty = "cadence",
     discriminatorMapping = {
-        @DiscriminatorMapping(value = "MONTHLY", schema = MonthlySubscriptionDto.class),
-        @DiscriminatorMapping(value = "ANNUAL", schema = AnnualSubscriptionDto.class),
-        @DiscriminatorMapping(value = "CUSTOM", schema = CustomSubscriptionDto.class)
+        @DiscriminatorMapping(value = "MONTHLY", schema = MonthlySubscriptionPayload.class),
+        @DiscriminatorMapping(value = "ANNUAL", schema = AnnualSubscriptionPayload.class),
+        @DiscriminatorMapping(value = "CUSTOM", schema = CustomSubscriptionPayload.class)
     },
-    anyOf = {MonthlySubscriptionDto.class, AnnualSubscriptionDto.class, CustomSubscriptionDto.class}
+    anyOf = {MonthlySubscriptionPayload.class, AnnualSubscriptionPayload.class, CustomSubscriptionPayload.class}
 )
 @JsonTypeInfo(
     use = Id.NAME,
@@ -32,12 +32,12 @@ import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
     property = "cadence"
 )
 @JsonSubTypes({
-    @Type(value = MonthlySubscriptionDto.class, name = "MONTHLY"),
-    @Type(value = AnnualSubscriptionDto.class, name = "ANNUAL"),
-    @Type(value = CustomSubscriptionDto.class, name = "CUSTOM")
+    @Type(value = MonthlySubscriptionPayload.class, name = "MONTHLY"),
+    @Type(value = AnnualSubscriptionPayload.class, name = "ANNUAL"),
+    @Type(value = CustomSubscriptionPayload.class, name = "CUSTOM")
 })
 @Data
-public abstract class SubscriptionDto {
+public abstract class BaseSubscriptionPayload {
 
     @Schema(description = "Type of the subscription.")
     @NotNull
@@ -46,7 +46,7 @@ public abstract class SubscriptionDto {
     @Schema(description = "Price you pay for the subscription.")
     @Valid
     @NotNull
-    private MoneyDto price;
+    private MoneyPayload price;
 
     public Money fee() {
         return Money.of(price.getAmount(), Currency.getInstance(price.getCurrency()));

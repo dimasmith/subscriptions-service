@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.application;
+package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -11,19 +11,19 @@ import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
-public class MonthlySubscriptionDto extends SubscriptionDto {
+public class MonthlySubscriptionPayload extends BaseSubscriptionPayload {
 
-    public MonthlySubscriptionDto() {
+    public MonthlySubscriptionPayload() {
         setCadence(Cadence.MONTHLY);
     }
 
-    private MonthlySubscriptionDto(MoneyDto price) {
+    private MonthlySubscriptionPayload(MoneyPayload price) {
         this();
         setPrice(price);
     }
 
-    public static MonthlySubscriptionDto of(MoneyDto price) {
-        return new MonthlySubscriptionDto(price);
+    public static MonthlySubscriptionPayload of(MoneyPayload price) {
+        return new MonthlySubscriptionPayload(price);
     }
 
     @Override
