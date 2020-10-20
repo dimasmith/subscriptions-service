@@ -1,0 +1,5 @@
+subscription:
+  - name: Annually Paid Service
+    amount: 2499.00
+    currency: UAH
+    cadence: ANNUAL

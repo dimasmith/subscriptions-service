@@ -1,0 +1,14 @@
+exchange_rate_provider:
+  - id: 1
+    name: admin
+    title: admin
+
+exchange_rate_provider_rates:
+  - exchange_rate_provider_id: 1
+    source_currency: USD
+    target_currency: UAH
+    rate: 50.00
+  - exchange_rate_provider_id: 1
+    source_currency: UAH
+    target_currency: USD
+    rate: 0.02

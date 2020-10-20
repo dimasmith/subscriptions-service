@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.time.LocalDate;
 import java.time.Month;
 import javax.validation.Valid;
-import net.anatolich.subscriptions.subscription.application.MonthlyFee;
 import net.anatolich.subscriptions.subscription.application.SubscribeCommand;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import org.springframework.http.HttpStatus;

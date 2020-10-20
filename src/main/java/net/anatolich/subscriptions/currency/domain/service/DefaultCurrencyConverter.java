@@ -1,6 +1,7 @@
-package net.anatolich.subscriptions.currency.domain;
+package net.anatolich.subscriptions.currency.domain.service;
 
 import java.util.Currency;
+import net.anatolich.subscriptions.currency.domain.ExchangeRateProvidersRepository;
 import net.anatolich.subscriptions.subscription.domain.CurrencyConverter;
 import net.anatolich.subscriptions.subscription.domain.Money;
 import org.springframework.stereotype.Component;

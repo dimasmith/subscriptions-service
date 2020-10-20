@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import net.anatolich.subscriptions.subscription.domain.Money;
 
 @Embeddable
@@ -16,6 +17,7 @@ import net.anatolich.subscriptions.subscription.domain.Money;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @EqualsAndHashCode(of = {"sourceCurrency", "targetCurrency"})
+@ToString
 public class ExchangeRate {
 
     private Currency sourceCurrency;

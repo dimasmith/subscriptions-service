@@ -9,16 +9,22 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.TableGenerator;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
 /**
- * The source of exchange rates. It can be the system admin or some bank.
- * The user can choose one provider to make currency exchange.
+ * The source of exchange rates. It can be the system admin or some bank. The user can choose one provider to make
+ * currency exchange.
  */
 @Entity
+@Setter(AccessLevel.PRIVATE)
+@EqualsAndHashCode(of = {"name"})
 public class ExchangeRateProvider {
 
     @Id
@@ -30,8 +36,12 @@ public class ExchangeRateProvider {
     private String name;
     @Column(length = 100, nullable = false, unique = true, updatable = false)
     private String title;
-    @ElementCollection
-    private Set<ExchangeRate> rates = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<ExchangeRate> rates;
+
+    public ExchangeRateProvider() {
+        rates = new HashSet<>();
+    }
 
     public void updateRates(Collection<ExchangeRate> newRates) {
         rates.removeAll(newRates);
