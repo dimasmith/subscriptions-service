@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +55,20 @@ public class SubscriptionsEndpoint {
         final Month currentMonth = today.getMonth();
         final int currentYear = today.getYear();
         var monthlyFee = subscriptions.calculateMonthlyFee(currentMonth, currentYear);
+        return MonthlyFeePayload.from(monthlyFee);
+    }
+
+    @Operation(
+        summary = "Calculate the total fee for the selected month and year.",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "Calculated")
+        }
+    )
+    @GetMapping(path = "/fee/{year}-{month}")
+    public MonthlyFeePayload calculateMonthlyFeeForSelectedMonth(
+        @PathVariable(name = "year") int year,
+        @PathVariable(name = "month") Month month) {
+        var monthlyFee = subscriptions.calculateMonthlyFee(month, year);
         return MonthlyFeePayload.from(monthlyFee);
     }
 }
