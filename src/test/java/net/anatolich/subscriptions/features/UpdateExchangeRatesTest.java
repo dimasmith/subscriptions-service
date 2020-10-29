@@ -1,12 +1,12 @@
 package net.anatolich.subscriptions.features;
 
-import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
+
 import java.util.Currency;
 import java.util.Set;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;
 import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
-@DBRider
-@DBUnit(caseSensitiveTableNames = true)
+@DatabaseRiderTest
 @DisplayName("update exchange rates")
 class UpdateExchangeRatesTest {
 
@@ -28,7 +27,6 @@ class UpdateExchangeRatesTest {
 
     @Test
     @DataSet(value = "currency/updateExchangeRates-setup.yml", cleanBefore = true)
-//    @ExpectedDataSet(value = "currency/updateExchangeRates-expected.yml", compareOperation = CompareOperation.CONTAINS)
     @DisplayName("change existing rates")
     @WithMockUser(value = "admin", roles = {"USER", "ADMIN"})
     void changeExistingRates() {

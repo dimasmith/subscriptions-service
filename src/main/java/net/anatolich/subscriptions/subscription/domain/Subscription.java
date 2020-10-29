@@ -56,6 +56,10 @@ public class Subscription {
         return fee;
     }
 
+    public String service() {
+        return name;
+    }
+
     public boolean activeFor(Month month) {
         return schedule.activeFor(month);
     }

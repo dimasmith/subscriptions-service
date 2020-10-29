@@ -56,6 +56,15 @@ public class PaymentSchedule {
         );
     }
 
+    public static PaymentSchedule custom(Month firstMonth, Month secondMonth, Month... otherMonth) {
+        var months = new HashSet<>(Set.of(firstMonth, secondMonth));
+        months.addAll(Set.of(otherMonth));
+        return new PaymentSchedule(
+                Cadence.CUSTOM,
+                months
+        );
+    }
+
     private void setCadence(Cadence cadence) {
         if (cadence == null) {
             throw new IllegalArgumentException("cadence must be set");

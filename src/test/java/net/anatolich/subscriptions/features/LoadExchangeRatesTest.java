@@ -1,12 +1,12 @@
 package net.anatolich.subscriptions.features;
 
-import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;
 import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,8 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@DBRider
-@DBUnit(caseSensitiveTableNames = true)
+@DatabaseRiderTest
 @DisplayName("load exchange rates")
 class LoadExchangeRatesTest {
 

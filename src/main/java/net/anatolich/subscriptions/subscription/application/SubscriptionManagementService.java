@@ -2,6 +2,8 @@ package net.anatolich.subscriptions.subscription.application;
 
 import java.time.Month;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.security.domain.UserProvider;
@@ -49,14 +51,22 @@ public class SubscriptionManagementService {
         log.info("calculating monthly fee for {} of {}", month, year);
         final UserId owner = userProvider.currentUser();
         var preferredCurrency = preferredCurrencyProvider.preferredCurrencyOf(owner);
-        List<Subscription> activeSubscriptions = subscriptions.findSubscriptionsForMonth(month, owner);
+        final List<Subscription> activeSubscriptions = subscriptions.findSubscriptionsForMonth(month, owner);
         var total = activeSubscriptions.stream()
             .map(Subscription::fee)
             .map(fee -> currencyConverter.convert(fee, preferredCurrency))
             .reduce(Money::add)
             .orElse(Money.zero(preferredCurrency));
 
-        return MonthlyFee.withTotal(total);
+        var subscriptionFees = activeSubscriptions.stream()
+                .map(subscription -> new SubscriptionFee(
+                        subscription.service(),
+                        subscription.fee(),
+                        currencyConverter.convert(subscription.fee(), preferredCurrency)
+                ))
+                .collect(Collectors.toList());
+
+        return new MonthlyFee(total, subscriptionFees);
     }
 
 }
