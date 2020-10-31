@@ -33,6 +33,6 @@ public class MoneyPayload {
     }
 
     public static MoneyPayload from(Money monetaryValue) {
-        return new MoneyPayload(monetaryValue.getAmount(), monetaryValue.getCurrency().getCurrencyCode());
+        return new MoneyPayload(monetaryValue.getAmount().getAmount(), monetaryValue.getCurrency().getCurrencyCode());
     }
 }

@@ -1,6 +1,9 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import static net.anatolich.subscriptions.support.domain.ExtendedComparable.Comparison.higherOrEqualThan;
+
 import java.time.Month;
+import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -12,11 +15,17 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.anatolich.subscriptions.security.domain.UserId;
+import net.anatolich.subscriptions.support.domain.BaseEntity;
+import net.anatolich.subscriptions.support.domain.Invariants;
+import net.anatolich.subscriptions.support.domain.Invariants.StringInvariants;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"name", "fee", "owner"})
-public class Subscription {
+@SuppressWarnings("java:S2160") // equals and hash code comes from BaseEntity intentionally
+public class Subscription extends BaseEntity<Subscription, Long> {
+
+    private static final MonetaryAmount LOWEST_FEE_AMOUNT = MonetaryAmount.of(0.01);
 
     @Id
     @GeneratedValue(generator = "subscriptionSequence")
@@ -48,6 +57,7 @@ public class Subscription {
         return new Subscription(name, owner, fee, schedule);
     }
 
+    @Override
     public Long id() {
         return id;
     }
@@ -69,30 +79,23 @@ public class Subscription {
     }
 
     private void setName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("name must be set");
-        }
+        Invariants.checkValue(name, StringInvariants.NOT_BLANK, "name must be set");
         this.name = name;
     }
 
     private void setFee(Money fee) {
-        if (fee == null) {
-            throw new IllegalArgumentException("fee must be set");
-        }
+        Invariants.checkValue(fee, Objects::nonNull, "fee must be set");
+        Invariants.checkValue(fee.getAmount(), higherOrEqualThan(LOWEST_FEE_AMOUNT), "fee amount is too small");
         this.fee = fee;
     }
 
     private void setSchedule(PaymentSchedule schedule) {
-        if (schedule == null) {
-            throw new IllegalArgumentException("schedule must be set");
-        }
+        Invariants.checkValue(schedule, Objects::nonNull, "schedule must be set");
         this.schedule = schedule;
     }
 
-    public void setOwner(UserId owner) {
-        if (owner == null) {
-            throw new IllegalArgumentException("owner must be set");
-        }
+    private void setOwner(UserId owner) {
+        Invariants.checkValue(owner, Objects::nonNull, "owner must be set");
         this.owner = owner;
     }
 }

@@ -43,7 +43,7 @@ public class ExchangeRate {
         if (!supportsConversion(monetaryValue.getCurrency(), targetCurrency)) {
             throw new IllegalArgumentException("supplied monetary value currency differs from the source currency");
         }
-        return Money.of(monetaryValue.getAmount().multiply(rate), targetCurrency);
+        return monetaryValue.convertToCurrency(targetCurrency, rate);
     }
 
     public boolean supportsConversion(Currency from, Currency to) {

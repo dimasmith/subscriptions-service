@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.database.rider.core.api.dataset.CompareOperation;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
-import java.math.BigDecimal;
 import java.time.Month;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
+import net.anatolich.subscriptions.subscription.domain.MonetaryAmount;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.AnnualSubscriptionPayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.MoneyPayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.MonthlySubscriptionPayload;
@@ -41,7 +41,7 @@ class SubscribeTest {
             subscribeCommand.getSubscription().fee(), subscribeCommand.getSubscription().schedule());
 
         assertThat(subscriptions.calculateMonthlyFee(Month.MAY, 2020).total().getAmount())
-            .isGreaterThan(BigDecimal.ZERO);
+            .isGreaterThan(MonetaryAmount.of(0));
     }
 
     @Test
@@ -58,6 +58,6 @@ class SubscribeTest {
             subscribeCommand.getSubscription().fee(), subscribeCommand.getSubscription().schedule());
 
         assertThat(subscriptions.calculateMonthlyFee(Month.AUGUST, 2020).total().getAmount())
-            .isGreaterThan(BigDecimal.ZERO);
+            .isGreaterThan(MonetaryAmount.of(0));
     }
 }
