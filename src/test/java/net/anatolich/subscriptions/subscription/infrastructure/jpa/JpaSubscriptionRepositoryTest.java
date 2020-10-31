@@ -1,20 +1,18 @@
 package net.anatolich.subscriptions.subscription.infrastructure.jpa;
 
-import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
 import java.time.Month;
 import net.anatolich.subscriptions.security.domain.UserId;
+import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@DisplayName("jpa implementation of subscriptions repository")
 @SpringBootTest
-@DBRider
-@DBUnit(caseSensitiveTableNames = true)
+@DatabaseRiderTest
+@DisplayName("jpa implementation of subscriptions repository")
 class JpaSubscriptionRepositoryTest {
 
     @Autowired

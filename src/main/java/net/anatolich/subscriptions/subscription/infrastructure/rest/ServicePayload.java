@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ServicePayload {
+
     @NotBlank(message = "please provide the service name")
     @Schema(description = "the name of the service")
     private String name;

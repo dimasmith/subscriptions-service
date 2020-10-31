@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubscribeCommandPayload {
+
     @Valid
     @NotNull
     private ServicePayload service;

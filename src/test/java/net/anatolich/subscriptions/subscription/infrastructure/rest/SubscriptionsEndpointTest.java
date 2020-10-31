@@ -1,8 +1,9 @@
 package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,11 +14,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.Month;
+import java.util.List;
 import net.anatolich.subscriptions.subscription.application.MonthlyFee;
+import net.anatolich.subscriptions.subscription.application.SubscriptionFee;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
 import net.anatolich.subscriptions.subscription.domain.Money;
 import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,13 +83,19 @@ class SubscriptionsEndpointTest {
     @WithMockUser
     void calculateFeeForTheCurrentMonth() throws Exception {
         when(subscriptions.calculateMonthlyFee(any(Month.class), anyInt()))
-            .thenReturn(MonthlyFee.withTotal(Money.of(100, "USD")));
+            .thenReturn(new MonthlyFee(Money.of(100, "USD"),
+                List.of(new SubscriptionFee(
+                    "Dropbox",
+                    Money.of(200, "UAH"),
+                    Money.of(100, "USD")))));
 
         mockMvc.perform(
             get("/v1/subscriptions/fee").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("total.amount", Matchers.equalTo(100.0)))
-            .andExpect(jsonPath("total.currency", Matchers.equalTo("USD")));
+            .andExpect(jsonPath("total.amount", equalTo(100.0)))
+            .andExpect(jsonPath("total.currency", equalTo("USD")))
+            .andExpect(jsonPath("subscriptions[0].service", equalTo("Dropbox")))
+            .andExpect(jsonPath("subscriptions[0].originalFee.amount", equalTo(200.0)));
     }
 
     @Test
@@ -95,12 +103,12 @@ class SubscriptionsEndpointTest {
     @WithMockUser
     void calculateFeeForTheParticularMonth() throws Exception {
         when(subscriptions.calculateMonthlyFee(Month.MAY, 2020))
-            .thenReturn(MonthlyFee.withTotal(Money.of(100, "USD")));
+            .thenReturn(new MonthlyFee(Money.of(100, "USD"), List.of()));
 
         mockMvc.perform(
             get("/v1/subscriptions/fee/2020-MAY").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("total.amount", Matchers.equalTo(100.0)))
-            .andExpect(jsonPath("total.currency", Matchers.equalTo("USD")));
+            .andExpect(jsonPath("total.amount", equalTo(100.0)))
+            .andExpect(jsonPath("total.currency", equalTo("USD")));
     }
 }

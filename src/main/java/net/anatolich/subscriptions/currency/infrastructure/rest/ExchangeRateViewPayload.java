@@ -12,6 +12,7 @@ import net.anatolich.subscriptions.currency.domain.ExchangeRate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExchangeRateViewPayload {
+
     @Schema(description = "source currency of exchange rate")
     private String from;
     @Schema(description = "target currency of exchange rate")

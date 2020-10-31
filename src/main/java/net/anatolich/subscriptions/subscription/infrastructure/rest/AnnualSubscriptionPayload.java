@@ -14,6 +14,7 @@ import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 @Data
 @ToString(callSuper = true)
 public class AnnualSubscriptionPayload extends BaseSubscriptionPayload {
+
     @Schema(description = "the month when annual payment takes place")
     @NotNull
     private Month month;

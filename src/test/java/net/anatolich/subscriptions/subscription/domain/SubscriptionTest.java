@@ -58,7 +58,8 @@ class SubscriptionTest {
     @Test
     @DisplayName("custom subscription is active only for selected months")
     void customSubscriptionIsActiveOnlyForSelectedMonths() {
-        var paymentMonths = EnumSet.of(Month.JANUARY, Month.MARCH, Month.MAY, Month.JULY, Month.SEPTEMBER, Month.NOVEMBER);
+        var paymentMonths = EnumSet
+            .of(Month.JANUARY, Month.MARCH, Month.MAY, Month.JULY, Month.SEPTEMBER, Month.NOVEMBER);
         var nonPaymentMonth = EnumSet.complementOf(paymentMonths);
         var subscription = Subscription
             .subscription("test", UserId.of("alex"),
