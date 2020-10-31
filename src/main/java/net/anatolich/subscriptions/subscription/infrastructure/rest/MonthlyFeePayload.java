@@ -1,13 +1,12 @@
 package net.anatolich.subscriptions.subscription.infrastructure.rest;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.anatolich.subscriptions.subscription.application.MonthlyFee;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Schema(name = "MonthlyFee", description = "Total monthly fee for the services.")
 @Data

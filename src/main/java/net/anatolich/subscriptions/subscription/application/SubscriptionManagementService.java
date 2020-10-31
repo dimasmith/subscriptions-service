@@ -3,7 +3,6 @@ package net.anatolich.subscriptions.subscription.application;
 import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import lombok.extern.slf4j.Slf4j;
 import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.security.domain.UserProvider;
@@ -52,11 +51,6 @@ public class SubscriptionManagementService {
         final UserId owner = userProvider.currentUser();
         var preferredCurrency = preferredCurrencyProvider.preferredCurrencyOf(owner);
         final List<Subscription> activeSubscriptions = subscriptions.findSubscriptionsForMonth(month, owner);
-        var total = activeSubscriptions.stream()
-            .map(Subscription::fee)
-            .map(fee -> currencyConverter.convert(fee, preferredCurrency))
-            .reduce(Money::add)
-            .orElse(Money.zero(preferredCurrency));
 
         var subscriptionFees = activeSubscriptions.stream()
                 .map(subscription -> new SubscriptionFee(
@@ -65,6 +59,11 @@ public class SubscriptionManagementService {
                         currencyConverter.convert(subscription.fee(), preferredCurrency)
                 ))
                 .collect(Collectors.toList());
+
+        var total = subscriptionFees.stream()
+            .map(SubscriptionFee::convertedFee)
+            .reduce(Money::add)
+            .orElse(Money.zero(preferredCurrency));
 
         return new MonthlyFee(total, subscriptionFees);
     }
