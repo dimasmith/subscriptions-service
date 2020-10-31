@@ -1,6 +1,8 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import java.math.BigDecimal;
 import java.time.Month;
+import java.util.Objects;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -18,6 +20,7 @@ import net.anatolich.subscriptions.security.domain.UserId;
 @ToString(of = {"name", "fee", "owner"})
 public class Subscription {
 
+    private static final BigDecimal LOWEST_FEE_AMOUNT = BigDecimal.valueOf(0.01);
     @Id
     @GeneratedValue(generator = "subscriptionSequence")
     @TableGenerator(name = "subscriptionSequence", table = "subscription_sequence")
@@ -79,6 +82,9 @@ public class Subscription {
         if (fee == null) {
             throw new IllegalArgumentException("fee must be set");
         }
+        if (fee.hasAmountLowerThan(LOWEST_FEE_AMOUNT)) {
+            throw new IllegalArgumentException("fee amount is too small");
+        }
         this.fee = fee;
     }
 
@@ -94,5 +100,22 @@ public class Subscription {
             throw new IllegalArgumentException("owner must be set");
         }
         this.owner = owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Subscription that = (Subscription) o;
+        return id != null && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
     }
 }

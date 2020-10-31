@@ -1,5 +1,7 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -71,6 +73,41 @@ class MoneyTest {
             Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .as("it's illegal to add values of different currencies")
                 .isThrownBy(() -> dollarAmount.add(euroAmount));
+        }
+    }
+
+    @Nested
+    @DisplayName("invariants")
+    class Invariants {
+
+        private final Currency uah = Currency.getInstance("UAH");
+        private final BigDecimal amount = BigDecimal.valueOf(10.00);
+        private final double doubleAmount = 10.00;
+
+        @Test
+        @DisplayName("require amount")
+        void requireAmount() {
+            Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .as("amount is required")
+                .isThrownBy(() -> Money.of(null, uah))
+                .withMessageContaining("amount must be set");
+        }
+
+        @Test
+        @DisplayName("require currency")
+        void requireCurrency() {
+            Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .as("currency is required")
+                .isThrownBy(() -> Money.of(amount, null))
+                .withMessageContaining("currency must be set");
+        }
+
+        @Test
+        @DisplayName("require valid currency code")
+        void requireValidCurrency() {
+            Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .as("currency code must be valid")
+                .isThrownBy(() -> Money.of(doubleAmount, "ZZZ"));
         }
     }
 }

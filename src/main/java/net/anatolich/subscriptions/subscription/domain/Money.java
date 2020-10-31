@@ -50,6 +50,10 @@ public class Money {
         return new Money(amount.add(other.amount), currency);
     }
 
+    boolean hasAmountLowerThan(BigDecimal otherAmount) {
+        return getAmount().compareTo(otherAmount) < 0;
+    }
+
     private void setCurrency(Currency currency) {
         if (currency == null) {
             throw new IllegalArgumentException("currency must be set");
@@ -75,7 +79,7 @@ public class Money {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Money)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         final Money money = (Money) o;
