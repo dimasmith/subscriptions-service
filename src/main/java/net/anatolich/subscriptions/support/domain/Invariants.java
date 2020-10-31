@@ -3,12 +3,10 @@ package net.anatolich.subscriptions.support.domain;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Predicate;
-import net.anatolich.subscriptions.support.utility.UtilityClass;
 
 public class Invariants {
 
     private Invariants() {
-        UtilityClass.preventInstantiation();
     }
 
     public static <T> void checkValue(T value, Predicate<T> predicate, String message) {
@@ -20,7 +18,6 @@ public class Invariants {
     public static class StringInvariants {
 
         private StringInvariants() {
-            UtilityClass.preventInstantiation();
         }
 
         public static final Predicate<String> NOT_NULL = Objects::nonNull;
@@ -30,7 +27,6 @@ public class Invariants {
     public static class CollectionsInvariants {
 
         private CollectionsInvariants() {
-            UtilityClass.preventInstantiation();
         }
 
         public static final Predicate<Collection<?>> NOT_NULL = Objects::nonNull;
