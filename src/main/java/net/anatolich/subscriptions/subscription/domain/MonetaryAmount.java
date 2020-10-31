@@ -31,9 +31,7 @@ public class MonetaryAmount implements ExtendedComparable<MonetaryAmount> {
 
     private void setAmount(BigDecimal amount) {
         Invariants.checkValue(amount, Objects::nonNull, "amount must be set");
-        if (this.amount != null) {
-            throw new IllegalStateException("amount cannot be changed");
-        }
+        Invariants.checkImmutable(this.amount, "amount cannot be changed");
         this.amount = amount;
     }
 

@@ -15,13 +15,15 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import net.anatolich.subscriptions.security.domain.UserId;
+import net.anatolich.subscriptions.support.domain.BaseEntity;
 import net.anatolich.subscriptions.support.domain.Invariants;
 import net.anatolich.subscriptions.support.domain.Invariants.StringInvariants;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"name", "fee", "owner"})
-public class Subscription {
+@SuppressWarnings("java:S2160") // equals and hash code comes from BaseEntity intentionally
+public class Subscription extends BaseEntity<Subscription, Long> {
 
     private static final MonetaryAmount LOWEST_FEE_AMOUNT = MonetaryAmount.of(0.01);
 
@@ -55,6 +57,7 @@ public class Subscription {
         return new Subscription(name, owner, fee, schedule);
     }
 
+    @Override
     public Long id() {
         return id;
     }
@@ -91,25 +94,8 @@ public class Subscription {
         this.schedule = schedule;
     }
 
-    public void setOwner(UserId owner) {
+    private void setOwner(UserId owner) {
         Invariants.checkValue(owner, Objects::nonNull, "owner must be set");
         this.owner = owner;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final Subscription that = (Subscription) o;
-        return id != null && Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 31;
     }
 }

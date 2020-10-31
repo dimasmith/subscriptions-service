@@ -61,17 +61,13 @@ public class Money {
 
     private void setCurrency(Currency currency) {
         Invariants.checkValue(currency, Objects::nonNull, "currency must be set");
-        if (this.currency != null) {
-            throw new IllegalStateException("currency cannot be changed");
-        }
+        Invariants.checkImmutable(this.currency, "currency cannot be changed");
         this.currency = currency;
     }
 
     private void setAmount(MonetaryAmount amount) {
         Invariants.checkValue(amount, Objects::nonNull, "amount must be set");
-        if (this.amount != null) {
-            throw new IllegalStateException("amount cannot be changed");
-        }
+        Invariants.checkImmutable(this.amount, "amount cannot be changed");
         this.amount = amount;
     }
 }

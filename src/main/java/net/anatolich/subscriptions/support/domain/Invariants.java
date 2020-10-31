@@ -15,6 +15,12 @@ public class Invariants {
         }
     }
 
+    public static <T> void checkImmutable(T state, String message) {
+        if (state != null) {
+            throw new IllegalStateException(message);
+        }
+    }
+
     public static class StringInvariants {
 
         private StringInvariants() {

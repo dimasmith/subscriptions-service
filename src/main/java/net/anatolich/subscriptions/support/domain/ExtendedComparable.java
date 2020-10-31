@@ -12,7 +12,7 @@ public interface ExtendedComparable<T> extends Comparable<T> {
         LOWER, EQUAL, HIGHER;
 
         public boolean isLower() {
-            return this == LOWER;
+            return is(LOWER);
         }
 
         public static <T extends ExtendedComparable<T>> Predicate<T> lowerThan(T other) {
@@ -20,7 +20,7 @@ public interface ExtendedComparable<T> extends Comparable<T> {
         }
 
         public boolean isLowerOrEqual() {
-            return this == LOWER || this == EQUAL;
+            return isLower() || isEqual();
         }
 
         public static <T extends ExtendedComparable<T>> Predicate<T> lowerOrEqualThan(T other) {
@@ -28,7 +28,7 @@ public interface ExtendedComparable<T> extends Comparable<T> {
         }
 
         public boolean isEqual() {
-            return this == EQUAL;
+            return is(EQUAL);
         }
 
         public static <T extends ExtendedComparable<T>> Predicate<T> equalTo(T other) {
@@ -36,7 +36,7 @@ public interface ExtendedComparable<T> extends Comparable<T> {
         }
 
         public boolean isHigher() {
-            return this == HIGHER;
+            return is(HIGHER);
         }
 
         public static <T extends ExtendedComparable<T>> Predicate<T> higherThan(T other) {
@@ -44,7 +44,7 @@ public interface ExtendedComparable<T> extends Comparable<T> {
         }
 
         public boolean isHigherOrEqual() {
-            return this == HIGHER || this == EQUAL;
+            return isHigher() || isEqual();
         }
 
         public static <T extends ExtendedComparable<T>> Predicate<T> higherOrEqualThan(T other) {
