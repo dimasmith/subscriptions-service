@@ -1,13 +1,13 @@
 package net.anatolich.subscriptions.subscription.support;
 
 
+import java.math.BigDecimal;
+import java.util.Currency;
 import net.anatolich.subscriptions.subscription.domain.CurrencyConverter;
 import net.anatolich.subscriptions.subscription.domain.Money;
 
-import java.math.BigDecimal;
-import java.util.Currency;
-
 public class TestCurrencyConverter implements CurrencyConverter {
+
     private static final Currency UAH = Currency.getInstance("UAH");
     private static final Currency USD = Currency.getInstance("USD");
 

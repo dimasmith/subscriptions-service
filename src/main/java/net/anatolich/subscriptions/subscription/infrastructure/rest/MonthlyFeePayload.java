@@ -22,8 +22,8 @@ public class MonthlyFeePayload {
     public static MonthlyFeePayload from(MonthlyFee monthlyFee) {
 
         return new MonthlyFeePayload(
-                MoneyPayload.from(monthlyFee.total()),
-                monthlyFee.subscriptions().stream().map(SubscriptionFeePayload::from).collect(Collectors.toList())
+            MoneyPayload.from(monthlyFee.total()),
+            monthlyFee.subscriptions().stream().map(SubscriptionFeePayload::from).collect(Collectors.toList())
         );
     }
 }

@@ -60,8 +60,8 @@ public class PaymentSchedule {
         var months = new HashSet<>(Set.of(firstMonth, secondMonth));
         months.addAll(Set.of(otherMonth));
         return new PaymentSchedule(
-                Cadence.CUSTOM,
-                months
+            Cadence.CUSTOM,
+            months
         );
     }
 

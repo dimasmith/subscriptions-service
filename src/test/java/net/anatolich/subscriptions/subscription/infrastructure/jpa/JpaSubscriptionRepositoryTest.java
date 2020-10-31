@@ -1,7 +1,6 @@
 package net.anatolich.subscriptions.subscription.infrastructure.jpa;
 
 import com.github.database.rider.core.api.dataset.DataSet;
-
 import java.time.Month;
 import net.anatolich.subscriptions.security.domain.UserId;
 import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;

@@ -14,6 +14,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExchangeRatePayload {
+
     @Schema(description = "source currency of exchange rate")
     @NotNull
     @NotEmpty

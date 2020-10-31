@@ -1,7 +1,6 @@
 package net.anatolich.subscriptions.features;
 
 import com.github.database.rider.core.api.dataset.DataSet;
-
 import java.util.Currency;
 import java.util.Set;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;

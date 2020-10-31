@@ -1,9 +1,17 @@
 package net.anatolich.subscriptions.features;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.database.rider.core.api.dataset.CompareOperation;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
+import java.math.BigDecimal;
+import java.time.Month;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
-import net.anatolich.subscriptions.subscription.infrastructure.rest.*;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.AnnualSubscriptionPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.MoneyPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.MonthlySubscriptionPayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.ServicePayload;
+import net.anatolich.subscriptions.subscription.infrastructure.rest.SubscribeCommandPayload;
 import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,15 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.WithMockUser;
 
-import java.math.BigDecimal;
-import java.time.Month;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 @DatabaseRiderTest
 @DisplayName("subscribe")
 class SubscribeTest {
+
     @Autowired
     private SubscriptionManagementService subscriptions;
 

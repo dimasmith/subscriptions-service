@@ -53,12 +53,12 @@ public class SubscriptionManagementService {
         final List<Subscription> activeSubscriptions = subscriptions.findSubscriptionsForMonth(month, owner);
 
         var subscriptionFees = activeSubscriptions.stream()
-                .map(subscription -> new SubscriptionFee(
-                        subscription.service(),
-                        subscription.fee(),
-                        currencyConverter.convert(subscription.fee(), preferredCurrency)
-                ))
-                .collect(Collectors.toList());
+            .map(subscription -> new SubscriptionFee(
+                subscription.service(),
+                subscription.fee(),
+                currencyConverter.convert(subscription.fee(), preferredCurrency)
+            ))
+            .collect(Collectors.toList());
 
         var total = subscriptionFees.stream()
             .map(SubscriptionFee::convertedFee)

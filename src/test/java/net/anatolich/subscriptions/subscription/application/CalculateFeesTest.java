@@ -1,5 +1,8 @@
 package net.anatolich.subscriptions.subscription.application;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.time.Month;
 import net.anatolich.subscriptions.subscription.domain.Money;
 import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
 import net.anatolich.subscriptions.subscription.support.SubscriptionTestConfiguration;
@@ -9,10 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Month;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Import(SubscriptionTestConfiguration.class)
@@ -30,7 +29,7 @@ class CalculateFeesTest {
         var monthlyFee = subscriptions.calculateMonthlyFee(Month.MAY, 2020);
 
         assertThat(monthlyFee.total())
-                .isEqualTo(Money.of(30, "UAH"));
+            .isEqualTo(Money.of(30, "UAH"));
     }
 
     @Test
@@ -39,7 +38,7 @@ class CalculateFeesTest {
         var monthlyFee = subscriptions.calculateMonthlyFee(Month.MAY, 2020);
 
         assertThat(monthlyFee.subscriptions())
-                .containsOnly(new SubscriptionFee("Spotify", Money.of(10, "USD"), Money.of(20, "UAH")));
+            .containsOnly(new SubscriptionFee("Spotify", Money.of(10, "USD"), Money.of(20, "UAH")));
     }
 
     @Test
@@ -49,10 +48,10 @@ class CalculateFeesTest {
         var monthlyFee = subscriptions.calculateMonthlyFee(Month.MAY, 2020);
 
         assertThat(monthlyFee.subscriptions())
-                .containsExactlyInAnyOrder(
-                        new SubscriptionFee("Spotify", Money.of(10, "USD"), Money.of(20, "UAH")),
-                        new SubscriptionFee("Dropbox", Money.of(30, "UAH"), Money.of(30, "UAH"))
-                );
+            .containsExactlyInAnyOrder(
+                new SubscriptionFee("Spotify", Money.of(10, "USD"), Money.of(20, "UAH")),
+                new SubscriptionFee("Dropbox", Money.of(30, "UAH"), Money.of(30, "UAH"))
+            );
     }
 
     @Test
@@ -65,9 +64,9 @@ class CalculateFeesTest {
         var monthlyFee = subscriptions.calculateMonthlyFee(Month.MAY, 2020);
 
         assertThat(monthlyFee.total())
-                .isEqualTo(Money.of(30, "UAH"));
+            .isEqualTo(Money.of(30, "UAH"));
 
         assertThat(monthlyFee.subscriptions()).extracting(SubscriptionFee::name)
-                .containsExactlyInAnyOrder("Spotify", "Dropbox");
+            .containsExactlyInAnyOrder("Spotify", "Dropbox");
     }
 }

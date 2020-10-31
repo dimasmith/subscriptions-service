@@ -9,6 +9,7 @@ import net.anatolich.subscriptions.subscription.application.SubscriptionFee;
 @Data
 @Builder
 public class SubscriptionFeePayload {
+
     @Schema(description = "the name of the service")
     private String service;
     @Schema(description = "fee in the original currency")
@@ -18,9 +19,9 @@ public class SubscriptionFeePayload {
 
     public static SubscriptionFeePayload from(SubscriptionFee subscriptionFee) {
         return new SubscriptionFeePayload(
-                subscriptionFee.name(),
-                MoneyPayload.from(subscriptionFee.originalFee()),
-                MoneyPayload.from(subscriptionFee.convertedFee())
+            subscriptionFee.name(),
+            MoneyPayload.from(subscriptionFee.originalFee()),
+            MoneyPayload.from(subscriptionFee.convertedFee())
         );
     }
 }

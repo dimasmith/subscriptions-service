@@ -17,6 +17,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money {
+
     @Column(nullable = false)
     private Currency currency;
     @Column(nullable = false)
