@@ -4,6 +4,7 @@ import java.time.Month;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,6 +16,8 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import net.anatolich.subscriptions.support.domain.Invariants;
+import net.anatolich.subscriptions.support.domain.Invariants.CollectionsInvariants;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -65,24 +68,17 @@ public class PaymentSchedule {
         );
     }
 
+    public boolean activeFor(Month month) {
+        return periods.contains(month);
+    }
+
     private void setCadence(Cadence cadence) {
-        if (cadence == null) {
-            throw new IllegalArgumentException("cadence must be set");
-        }
+        Invariants.checkValue(cadence, Objects::nonNull, "cadence must be set");
         this.cadence = cadence;
     }
 
     private void setPeriods(Set<Month> periods) {
-        if (periods == null) {
-            throw new IllegalArgumentException("periods must be set");
-        }
-        if (periods.isEmpty()) {
-            throw new IllegalArgumentException("at least one period must be selected");
-        }
+        Invariants.checkValue(periods, CollectionsInvariants.NOT_EMPTY, "at least one period must be selected");
         this.periods = periods;
-    }
-
-    public boolean activeFor(Month month) {
-        return periods.contains(month);
     }
 }

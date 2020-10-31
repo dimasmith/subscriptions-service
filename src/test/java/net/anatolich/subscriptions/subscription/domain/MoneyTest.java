@@ -89,7 +89,12 @@ class MoneyTest {
         void requireAmount() {
             Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
                 .as("amount is required")
-                .isThrownBy(() -> Money.of(null, uah))
+                .isThrownBy(() -> Money.of((MonetaryAmount) null, uah))
+                .withMessageContaining("amount must be set");
+
+            Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .as("amount is required")
+                .isThrownBy(() -> Money.of((BigDecimal) null, uah))
                 .withMessageContaining("amount must be set");
         }
 

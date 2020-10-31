@@ -6,41 +6,46 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
+import net.anatolich.subscriptions.support.domain.Invariants;
 
 @Embeddable
-@Getter
-@Setter(AccessLevel.PROTECTED)
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@EqualsAndHashCode
+@ToString
 public class Money {
 
     @Column(nullable = false)
     private Currency currency;
     @Column(nullable = false)
-    private BigDecimal amount;
+    private MonetaryAmount amount;
 
-    private Money(BigDecimal amount, Currency currency) {
+    private Money(MonetaryAmount amount, Currency currency) {
         setAmount(amount);
         setCurrency(currency);
     }
 
-    public static Money of(BigDecimal amount, Currency currency) {
+    public static Money of(MonetaryAmount amount, Currency currency) {
         return new Money(amount, currency);
+    }
+
+    public static Money of(BigDecimal amount, Currency currency) {
+        return new Money(MonetaryAmount.of(amount), currency);
     }
 
     public static Money of(double amount, String currencyCode) {
         return new Money(
-            BigDecimal.valueOf(amount),
+            MonetaryAmount.of(amount),
             Currency.getInstance(currencyCode)
         );
     }
 
     public static Money zero(Currency currency) {
-        return of(BigDecimal.ZERO, currency);
+        return of(MonetaryAmount.ZERO, currency);
     }
 
     public Money add(Money other) {
@@ -50,45 +55,23 @@ public class Money {
         return new Money(amount.add(other.amount), currency);
     }
 
-    boolean hasAmountLowerThan(BigDecimal otherAmount) {
-        return getAmount().compareTo(otherAmount) < 0;
+    public Money convertToCurrency(Currency targetCurrency, BigDecimal rate) {
+        return of(getAmount().multiply(rate), targetCurrency);
     }
 
     private void setCurrency(Currency currency) {
-        if (currency == null) {
-            throw new IllegalArgumentException("currency must be set");
-        }
+        Invariants.checkValue(currency, Objects::nonNull, "currency must be set");
         if (this.currency != null) {
             throw new IllegalStateException("currency cannot be changed");
         }
         this.currency = currency;
     }
 
-    private void setAmount(BigDecimal amount) {
-        if (amount == null) {
-            throw new IllegalArgumentException("amount must be set");
-        }
+    private void setAmount(MonetaryAmount amount) {
+        Invariants.checkValue(amount, Objects::nonNull, "amount must be set");
         if (this.amount != null) {
             throw new IllegalStateException("amount cannot be changed");
         }
         this.amount = amount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final Money money = (Money) o;
-        return currency.equals(money.currency) &&
-            amount.compareTo(money.amount) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(currency, amount);
     }
 }
