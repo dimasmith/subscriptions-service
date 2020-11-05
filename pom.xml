@@ -173,6 +173,9 @@
                         <args>
                             <arg>--enable-preview</arg>
                         </args>
+                        <jvmFlags>
+                            <jvmFlag>--enable-preview</jvmFlag>
+                        </jvmFlags>
                     </container>
                 </configuration>
             </plugin>
