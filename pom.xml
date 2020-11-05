@@ -169,6 +169,11 @@
                     <from>
                         <image>openjdk:15-alpine</image>
                     </from>
+                    <container>
+                        <args>
+                            <arg>--enable-preview</arg>
+                        </args>
+                    </container>
                 </configuration>
             </plugin>
             <plugin>
