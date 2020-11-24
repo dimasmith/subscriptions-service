@@ -6,12 +6,14 @@ import javax.persistence.Embeddable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import net.anatolich.subscriptions.support.domain.ExtendedComparable;
 import net.anatolich.subscriptions.support.domain.Invariants;
 
 @Embeddable
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@ToString
 public class MonetaryAmount implements ExtendedComparable<MonetaryAmount> {
 
     public static final MonetaryAmount ZERO = MonetaryAmount.of(BigDecimal.ZERO);

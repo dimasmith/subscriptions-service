@@ -3,6 +3,7 @@ package net.anatolich.subscriptions.features;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.database.rider.core.api.dataset.CompareOperation;
+import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import java.time.Month;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
@@ -22,6 +23,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 @SpringBootTest
 @DatabaseRiderTest
 @DisplayName("subscribe")
+
 class SubscribeTest {
 
     @Autowired
@@ -29,6 +31,7 @@ class SubscribeTest {
 
     @Test
     @DisplayName("create monthly subscription")
+    @DataSet(value = "subscriptions/exchangeRates-setup.yml", cleanBefore = true)
     @ExpectedDataSet(value = "subscriptions/createMonthlySubscription-expected.yml",
         compareOperation = CompareOperation.CONTAINS)
     @WithMockUser("admin")
@@ -46,6 +49,7 @@ class SubscribeTest {
 
     @Test
     @DisplayName("create annual subscription")
+    @DataSet(value = "subscriptions/exchangeRates-setup.yml", cleanBefore = true)
     @ExpectedDataSet(value = "subscriptions/createAnnualSubscription-expected.yml",
         compareOperation = CompareOperation.CONTAINS)
     @WithMockUser("admin")

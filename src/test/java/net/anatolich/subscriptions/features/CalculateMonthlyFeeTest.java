@@ -1,5 +1,6 @@
 package net.anatolich.subscriptions.features;
 
+import com.github.database.rider.core.api.dataset.DataSet;
 import java.time.Month;
 import net.anatolich.subscriptions.subscription.application.MonthlyFee;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
@@ -8,6 +9,7 @@ import net.anatolich.subscriptions.subscription.infrastructure.rest.MoneyPayload
 import net.anatolich.subscriptions.subscription.infrastructure.rest.MonthlySubscriptionPayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.ServicePayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.SubscribeCommandPayload;
+import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 
 @SpringBootTest
 @DisplayName("calculate monthly fee")
+@DatabaseRiderTest
 class CalculateMonthlyFeeTest {
 
     @Autowired
@@ -24,6 +27,7 @@ class CalculateMonthlyFeeTest {
 
     @Test
     @DisplayName("fee for multiple services")
+    @DataSet(value = "subscriptions/exchangeRates-setup.yml", cleanBefore = true)
     @WithMockUser("admin")
     void calculateFeeForAFewServices() {
         var dropboxSubscription = monthly("Dropbox", 19.99);
@@ -40,6 +44,7 @@ class CalculateMonthlyFeeTest {
         MonthlyFee monthlyFee = service.calculateMonthlyFee(Month.MAY, 2021);
 
         Assertions.assertThat(monthlyFee.total())
+            .as(monthlyFee.subscriptions().toString())
             .isEqualTo(Money.of(24.98, "UAH"));
     }
 
