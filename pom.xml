@@ -23,7 +23,7 @@
         <sonar.projectKey>dimasmith_subscriptions-service</sonar.projectKey>
         <sonar.organization>dimasmith</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <springdoc-openapi-ui.version>1.5.2</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.5.3</springdoc-openapi-ui.version>
     </properties>
 
     <dependencies>
