@@ -1,7 +1,7 @@
 package net.anatolich.subscriptions.currency.infrastructure.jpa;
 
-import net.anatolich.subscriptions.currency.domain.ExchangeRateProvider;
-import net.anatolich.subscriptions.currency.domain.ExchangeRateProvidersRepository;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRateProvider;
+import net.anatolich.subscriptions.currency.domain.service.ExchangeRateProvidersRepository;
 import org.springframework.stereotype.Component;
 
 @Component

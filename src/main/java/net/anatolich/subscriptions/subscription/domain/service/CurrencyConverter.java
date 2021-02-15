@@ -1,6 +1,7 @@
-package net.anatolich.subscriptions.subscription.domain;
+package net.anatolich.subscriptions.subscription.domain.service;
 
 import java.util.Currency;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 
 /**
  * Convert monetary amounts of one currency into amounts of another currency.

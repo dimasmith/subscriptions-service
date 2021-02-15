@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.domain;
+package net.anatolich.subscriptions.subscription.domain.model;
 
 import static net.anatolich.subscriptions.support.domain.ExtendedComparable.Comparison.higherOrEqualThan;
 
@@ -14,7 +14,7 @@ import javax.persistence.TableGenerator;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import net.anatolich.subscriptions.security.domain.UserId;
+import net.anatolich.subscriptions.security.domain.model.UserId;
 import net.anatolich.subscriptions.support.domain.BaseEntity;
 import net.anatolich.subscriptions.support.domain.Invariants;
 import net.anatolich.subscriptions.support.domain.Invariants.StringInvariants;

@@ -1,7 +1,7 @@
 package net.anatolich.subscriptions.security.infrastructure.spring;
 
-import net.anatolich.subscriptions.security.domain.UserId;
-import net.anatolich.subscriptions.security.domain.UserProvider;
+import net.anatolich.subscriptions.security.domain.model.UserId;
+import net.anatolich.subscriptions.security.domain.model.UserProvider;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;

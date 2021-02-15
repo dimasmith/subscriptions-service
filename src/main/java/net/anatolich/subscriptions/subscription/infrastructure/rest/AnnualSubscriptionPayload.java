@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.anatolich.subscriptions.subscription.domain.Cadence;
-import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.model.Cadence;
+import net.anatolich.subscriptions.subscription.domain.model.PaymentSchedule;
 
 @Schema(name = "AnnualSubscription", description = "Service subscription with annual payments.")
 @EqualsAndHashCode(callSuper = true)

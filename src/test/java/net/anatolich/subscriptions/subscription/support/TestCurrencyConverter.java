@@ -3,8 +3,8 @@ package net.anatolich.subscriptions.subscription.support;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-import net.anatolich.subscriptions.subscription.domain.CurrencyConverter;
-import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.subscription.domain.service.CurrencyConverter;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 
 public class TestCurrencyConverter implements CurrencyConverter {
 

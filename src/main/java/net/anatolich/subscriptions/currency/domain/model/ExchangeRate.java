@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.currency.domain;
+package net.anatolich.subscriptions.currency.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 
 @Embeddable
 @Getter

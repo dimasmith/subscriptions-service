@@ -1,7 +1,7 @@
-package net.anatolich.subscriptions.subscription.domain;
+package net.anatolich.subscriptions.subscription.domain.service;
 
 import java.util.Currency;
-import net.anatolich.subscriptions.security.domain.UserId;
+import net.anatolich.subscriptions.security.domain.model.UserId;
 
 /**
  * Provides a base currency for the user.

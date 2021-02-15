@@ -7,7 +7,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.core.api.dataset.ExpectedDataSet;
 import java.time.Month;
 import net.anatolich.subscriptions.subscription.application.SubscriptionManagementService;
-import net.anatolich.subscriptions.subscription.domain.MonetaryAmount;
+import net.anatolich.subscriptions.subscription.domain.model.MonetaryAmount;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.AnnualSubscriptionPayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.MoneyPayload;
 import net.anatolich.subscriptions.subscription.infrastructure.rest.MonthlySubscriptionPayload;

@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 import org.hibernate.validator.constraints.Length;
 
 @Schema(name = "Money", description = "Monetary value with amount and currency code.")

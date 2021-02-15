@@ -2,8 +2,8 @@ package net.anatolich.subscriptions.currency.application;
 
 import java.util.Collection;
 import java.util.Set;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
-import net.anatolich.subscriptions.currency.domain.ExchangeRateProvidersRepository;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.service.ExchangeRateProvidersRepository;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

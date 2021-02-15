@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.currency.domain;
+package net.anatolich.subscriptions.currency.domain.model;
 
 import java.util.Collection;
 import java.util.Collections;

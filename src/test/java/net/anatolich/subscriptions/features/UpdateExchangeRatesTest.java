@@ -4,7 +4,7 @@ import com.github.database.rider.core.api.dataset.DataSet;
 import java.util.Currency;
 import java.util.Set;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
 import net.anatolich.subscriptions.support.dbrider.DatabaseRiderTest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;

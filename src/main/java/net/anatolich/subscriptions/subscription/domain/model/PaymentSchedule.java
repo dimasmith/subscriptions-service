@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.domain;
+package net.anatolich.subscriptions.subscription.domain.model;
 
 import java.time.Month;
 import java.util.Collection;

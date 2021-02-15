@@ -1,8 +1,8 @@
 package net.anatolich.subscriptions.profile.domain.service;
 
 import java.util.Currency;
-import net.anatolich.subscriptions.security.domain.UserId;
-import net.anatolich.subscriptions.subscription.domain.PreferredCurrencyProvider;
+import net.anatolich.subscriptions.security.domain.model.UserId;
+import net.anatolich.subscriptions.subscription.domain.service.PreferredCurrencyProvider;
 import org.springframework.stereotype.Component;
 
 @Component
