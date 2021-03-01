@@ -2,10 +2,9 @@ package net.anatolich.subscriptions.currency.domain.service;
 
 import java.util.Currency;
 import java.util.Set;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
-import net.anatolich.subscriptions.currency.domain.ExchangeRateProvider;
-import net.anatolich.subscriptions.currency.domain.ExchangeRateProvidersRepository;
-import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRateProvider;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

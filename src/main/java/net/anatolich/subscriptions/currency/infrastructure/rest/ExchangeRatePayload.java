@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
 import org.hibernate.validator.constraints.Length;
 
 @Schema(name = "ExchangeRate", description = "exchange rate of two currencies")

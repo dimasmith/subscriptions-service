@@ -2,8 +2,8 @@ package net.anatolich.subscriptions.subscription.infrastructure.jpa;
 
 import java.time.Month;
 import java.util.List;
-import net.anatolich.subscriptions.security.domain.UserId;
-import net.anatolich.subscriptions.subscription.domain.Subscription;
+import net.anatolich.subscriptions.security.domain.model.UserId;
+import net.anatolich.subscriptions.subscription.domain.model.Subscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

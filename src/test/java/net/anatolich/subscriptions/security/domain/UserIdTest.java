@@ -1,5 +1,6 @@
 package net.anatolich.subscriptions.security.domain;
 
+import net.anatolich.subscriptions.security.domain.model.UserId;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

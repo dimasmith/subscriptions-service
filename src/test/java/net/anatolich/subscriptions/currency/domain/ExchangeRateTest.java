@@ -1,6 +1,7 @@
 package net.anatolich.subscriptions.currency.domain;
 
-import net.anatolich.subscriptions.subscription.domain.Money;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

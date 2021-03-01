@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.security.domain;
+package net.anatolich.subscriptions.security.domain.model;
 
 import javax.persistence.Embeddable;
 import lombok.AccessLevel;

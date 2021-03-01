@@ -11,9 +11,9 @@ import java.util.Currency;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import net.anatolich.subscriptions.subscription.domain.Cadence;
-import net.anatolich.subscriptions.subscription.domain.Money;
-import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.model.Cadence;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
+import net.anatolich.subscriptions.subscription.domain.model.PaymentSchedule;
 
 @Schema(
     name = "Subscription",

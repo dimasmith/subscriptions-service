@@ -2,9 +2,9 @@ package net.anatolich.subscriptions.subscription.infrastructure.jpa;
 
 import java.time.Month;
 import java.util.List;
-import net.anatolich.subscriptions.security.domain.UserId;
-import net.anatolich.subscriptions.subscription.domain.Subscription;
-import net.anatolich.subscriptions.subscription.domain.SubscriptionRepository;
+import net.anatolich.subscriptions.security.domain.model.UserId;
+import net.anatolich.subscriptions.subscription.domain.model.Subscription;
+import net.anatolich.subscriptions.subscription.domain.service.SubscriptionRepository;
 import org.springframework.stereotype.Component;
 
 @Component

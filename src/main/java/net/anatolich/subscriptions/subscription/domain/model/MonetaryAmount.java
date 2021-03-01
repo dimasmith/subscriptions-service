@@ -1,4 +1,4 @@
-package net.anatolich.subscriptions.subscription.domain;
+package net.anatolich.subscriptions.subscription.domain.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;

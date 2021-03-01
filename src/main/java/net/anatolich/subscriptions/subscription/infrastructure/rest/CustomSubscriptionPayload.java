@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.anatolich.subscriptions.subscription.domain.Cadence;
-import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.model.Cadence;
+import net.anatolich.subscriptions.subscription.domain.model.PaymentSchedule;
 
 @Schema(name = "CustomSubscription", description = "A subscription that happens only on certain month of the year."
     + " E.g. quarterly subscription or semi-annual subscription")

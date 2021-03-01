@@ -3,8 +3,8 @@ package net.anatolich.subscriptions.subscription.application;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Month;
-import net.anatolich.subscriptions.subscription.domain.Money;
-import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
+import net.anatolich.subscriptions.subscription.domain.model.PaymentSchedule;
 import net.anatolich.subscriptions.subscription.support.SubscriptionTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

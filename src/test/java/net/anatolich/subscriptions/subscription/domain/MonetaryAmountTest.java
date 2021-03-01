@@ -1,5 +1,6 @@
 package net.anatolich.subscriptions.subscription.domain;
 
+import net.anatolich.subscriptions.subscription.domain.model.MonetaryAmount;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

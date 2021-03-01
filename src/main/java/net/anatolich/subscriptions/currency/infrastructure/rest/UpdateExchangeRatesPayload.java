@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
 
 @Schema(name = "UpdateExchangeRates", description = "command to update exchange rates")
 @Data

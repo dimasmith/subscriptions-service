@@ -15,7 +15,7 @@ import java.util.Currency;
 import java.util.List;
 import java.util.Set;
 import net.anatolich.subscriptions.currency.application.ExchangeRatesManagementService;
-import net.anatolich.subscriptions.currency.domain.ExchangeRate;
+import net.anatolich.subscriptions.currency.domain.model.ExchangeRate;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

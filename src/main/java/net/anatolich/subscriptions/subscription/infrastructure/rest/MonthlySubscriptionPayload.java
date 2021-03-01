@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import net.anatolich.subscriptions.subscription.domain.Cadence;
-import net.anatolich.subscriptions.subscription.domain.PaymentSchedule;
+import net.anatolich.subscriptions.subscription.domain.model.Cadence;
+import net.anatolich.subscriptions.subscription.domain.model.PaymentSchedule;
 
 @Schema(name = "MonthlySubscription", description = "The subscription you pay each month.")
 @EqualsAndHashCode(callSuper = true)

@@ -2,6 +2,8 @@ package net.anatolich.subscriptions.subscription.domain;
 
 import java.math.BigDecimal;
 import java.util.Currency;
+import net.anatolich.subscriptions.subscription.domain.model.MonetaryAmount;
+import net.anatolich.subscriptions.subscription.domain.model.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
