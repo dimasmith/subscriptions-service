@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
+        <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>net.anatolich.subscriptions</groupId>
@@ -25,6 +25,7 @@
         <sonar.projectKey>dimasmith_subscriptions-service</sonar.projectKey>
         <sonar.organization>dimasmith</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <springdoc-openapi-ui.version>1.5.5</springdoc-openapi-ui.version>
     </properties>
 
     <dependencies>
@@ -175,7 +176,7 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>2.7.1</version>
+                <version>2.8.0</version>
                 <configuration>
                     <to>
                         <image>${project.artifactId}</image>
