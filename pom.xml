@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>15</java.version>
-        <testcontainers.version>1.15.2</testcontainers.version>
+        <testcontainers.version>1.15.3</testcontainers.version>
         <database-rider.version>1.22.0</database-rider.version>
         <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
         <springdoc-openapi-ui.version>1.5.7</springdoc-openapi-ui.version>
