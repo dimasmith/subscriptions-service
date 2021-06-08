@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 15
+          distribution: 'adopt'
+          checkLatest: true
       - name: build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -26,6 +28,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 15
+          distribution: 'adopt'
+          checkLatest: true
       - name: build
         run: >
           mvn -B compile jib:build
