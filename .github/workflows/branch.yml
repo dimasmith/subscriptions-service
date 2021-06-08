@@ -13,6 +13,8 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: 15
+          distribution: 'adopt'
+          checkLatest: true
       - name: build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
