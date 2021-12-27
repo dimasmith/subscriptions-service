@@ -19,7 +19,7 @@
         <testcontainers.version>1.15.3</testcontainers.version>
         <database-rider.version>1.23.1</database-rider.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
-        <springdoc-openapi-ui.version>1.5.7</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.6.3</springdoc-openapi-ui.version>
         <archunit.version>0.19.0</archunit.version>
 
         <sonar.projectKey>dimasmith_subscriptions-service</sonar.projectKey>
